@@ -1,0 +1,25 @@
+{
+    "name": "flyingfoxx/commandcenter",
+    "description": "Commands and domain events for any framework. Includes a Laravel implementation.",
+    "keywords": ["command", "events", "domain", "bus", "architecture", "laravel"],
+    "homepage": "http://github.com/flyingfoxx/commandcenter",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Flyingfoxx",
+            "email": "kyle@flyingfoxx.com"
+        }
+    ],
+    "require": {
+        "php": ">=5.4.0"
+    },
+    "require-dev": {
+        "phpspec/phpspec": "~2.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Flyingfoxx\\CommandCenter\\": "src/Flyingfoxx/CommandCenter"
+        }
+    },
+    "minimum-stability": "stable"
+}
