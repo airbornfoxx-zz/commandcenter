@@ -59,6 +59,8 @@ class RegisterUserCommand
 }
 ```
 
+> Using `Foxx` as an example application
+
 So instead of putting all the logic in the controller, you can now create a command passing data to a handler where the logic will reside. But now you need a transportation method to pass the command to its respective handler. How about a bus?
 
 ### Command Bus
@@ -116,14 +118,14 @@ By doing this, the command bus will pass the command to its respective handler, 
 
 It does this by mapping a command class to its respective handler class as follows:
 
-- RegisterUserCommand => RegisterUserCommandHandler
-- PostBlogEntryCommand => PostBlogEntryCommandHandler
+- RegisterUserCommand => RegisterUserHandler
+- PostBlogEntryCommand => PostBlogEntryHandler
 
 > Keep in mind you can easily change this by implementing the package's `CommandTranslator` class. Don't forget to update any application bindings.
 
 ### Command Handler
 
-Now you need a handler class that will handle the command. This will be where the command bus delivers the command. If the command class was `RegisterUserCommand`, then the handler class must be `RegisterUserCommandHandler`.
+Now you need a handler class that will handle the command. This will be where the command bus delivers the command. If the command class was `RegisterUserCommand`, then the handler class must be `RegisterUserHandler`.
 
 The handler class must implement the package's `CommandHandler` interface, requiring the `handle()` method.
 
@@ -132,7 +134,7 @@ The handler class must implement the package's `CommandHandler` interface, requi
 
 use Flyingfoxx\CommandCenter\CommandHandler;
 
-class RegisterUserCommandHandler implements CommandHandler
+class RegisterUserHandler implements CommandHandler
 {
     protected $user;
 
@@ -210,7 +212,7 @@ Okay, the `UserWasRegistered` event has now been raised and is now ready to be d
 use Flyingfoxx\CommandCenter\CommandHandler;
 use Flyingfoxx\CommandCenter\Eventing\EventDispatcher;
 
-class RegisterUserCommandHandler implements CommandHandler
+class RegisterUserHandler implements CommandHandler
 {
     protected $user;
 
@@ -353,7 +355,7 @@ This trait essentially wraps the event dispatcher up and can be used in your han
 use Flyingfoxx\CommandCenter\CommandHandler;
 use Flyingfoxx\CommandCenter\Laravel\Dispatcher;
 
-class RegisterUserCommandHandler implements CommandHandler
+class RegisterUserHandler implements CommandHandler
 {
     use Dispatcher;
 
@@ -377,6 +379,33 @@ class RegisterUserCommandHandler implements CommandHandler
 ```
 
 So, instead of calling `dispatch($events)`, you would call `dispatchEventsFor($entity)` on the handler class, passing in the entity. The trait will also automatically release the events on the passed in entity.
+
+### Laravel 4.3 Update
+
+Now with Laravel 4.3, you can make use of method injection as well as using form request objects as command objects. The mapping is as follows:
+
+- RegisterUserRequest => RegisterUserHandler
+- PostBlogEntryRequest => PostBlogEntryHandler
+
+Everything else should work the same. An example controller use is below:
+
+```php
+<?php namespace Foxx\Http\Controllers;
+
+use Flyingfoxx\CommandCenter\Laravel\Commander;
+use Foxx\Users\RegisterUserRequest;
+
+class RegistrationController
+{
+    use Commander;
+
+    public function store(RegisterUserRequest $request)
+    {
+        // Pass command to command bus
+        $this->execute($request);
+    }
+}
+```
 
 ## Conclusion
 

@@ -14,9 +14,19 @@ class MainCommandTranslatorSpec extends ObjectBehavior
     function it_translates_a_command_to_its_command_handler()
     {
         $command = new StubCommand;
-        $commandClass = get_class($command) . 'Handler';
+        $commandClass = get_class($command);
+        $handlerClass = substr_replace($commandClass, 'Handler', strrpos($commandClass, 'Command'));
 
-        $this->toHandler($command)->shouldReturn($commandClass);
+        $this->toHandler($command)->shouldReturn($handlerClass);
+    }
+
+    function it_translates_a_request_to_its_command_handler()
+    {
+        $request = new StubRequest;
+        $requestClass = get_class($request);
+        $handlerClass = substr_replace($requestClass, 'Handler', strrpos($requestClass, 'Request'));
+
+        $this->toHandler($request)->shouldReturn($handlerClass);
     }
 
     function it_translate_a_command_to_its_validation_handler()
@@ -28,6 +38,15 @@ class MainCommandTranslatorSpec extends ObjectBehavior
         $this->toValidator($command)->shouldReturn($validatorClass);
     }
 
+    function it_translate_a_request_to_its_validation_handler()
+    {
+        $request = new StubRequest;
+        $requestClass = get_class($request);
+        $validatorClass = substr_replace($requestClass, 'Validator', strrpos($requestClass, 'Request'));
+
+        $this->toValidator($request)->shouldReturn($validatorClass);
+    }
+
     function it_throws_exception_if_handler_class_does_not_exist()
     {
         $command = new StubNoHandlerCommand;
@@ -36,5 +55,6 @@ class MainCommandTranslatorSpec extends ObjectBehavior
 }
 
 class StubCommand {}
-class StubCommandHandler {}
+class StubHandler {}
+class StubRequest {}
 class StubNoHandlerCommand {}

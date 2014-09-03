@@ -10,7 +10,7 @@
 class MainCommandTranslator implements CommandTranslator
 {
     /**
-     * Translates a command to its respective handler.
+     * Translate a command to its respective handler.
      *
      * @param $command
      * @return mixed
@@ -18,8 +18,9 @@ class MainCommandTranslator implements CommandTranslator
      */
     public function toHandler($command)
     {
-        $commandClass = get_class($command);
-        $handlerClass = substr_replace($commandClass, 'CommandHandler', strrpos($commandClass, 'Command'));
+        $class = get_class($command);
+        $offset = $this->positionAt('Command', $class) ?: $this->positionAt('Request', $class);
+        $handlerClass = substr_replace($class, 'Handler', $offset);
 
         if (!class_exists($handlerClass))
         {
@@ -31,14 +32,28 @@ class MainCommandTranslator implements CommandTranslator
     }
 
     /**
-     * Translates a command to its respective validator.
+     * Translate a command to its respective validator.
      *
      * @param $command
      * @return mixed
      */
     public function toValidator($command)
     {
-        $commandClass = get_class($command);
-        return substr_replace($commandClass, 'Validator', strrpos($commandClass, 'Command'));
+        $class = get_class($command);
+        $offset = $this->positionAt('Command', $class) ?: $this->positionAt('Request', $class);
+
+        return substr_replace($class, 'Validator', $offset);
+    }
+
+    /**
+     * Find position of name in command class.
+     *
+     * @param $name
+     * @param $class
+     * @return mixed
+     */
+    protected function positionAt($name, $class)
+    {
+        return strpos($class, $name, strrpos($class, '\\'));
     }
 }
