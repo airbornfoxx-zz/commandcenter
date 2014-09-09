@@ -1,10 +1,10 @@
-<?php namespace Flyingfoxx\CommandCenter;
+<?php
+namespace Flyingfoxx\CommandCenter;
 
 /**
  * Transports commands to their respective validators.
  *
  * @package Flyingfoxx\CommandCenter
- * @license http://www.opensource.org/licenses/mit-license.php MIT
  * @author  Flyingfoxx <kyle@flyingfoxx.com>
  */
 class ValidationCommandBus implements CommandBus
@@ -54,8 +54,7 @@ class ValidationCommandBus implements CommandBus
     {
         $validator = $this->translator->toValidator($command);
 
-        if (class_exists($validator))
-        {
+        if (class_exists($validator)) {
             $this->app->make($validator)->validate($command);
         }
 

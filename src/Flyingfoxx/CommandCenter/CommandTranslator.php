@@ -1,10 +1,10 @@
-<?php namespace Flyingfoxx\CommandCenter;
+<?php
+namespace Flyingfoxx\CommandCenter;
 
 /**
  * Interface CommandTranslator
  *
  * @package Flyingfoxx\CommandCenter
- * @license http://www.opensource.org/licenses/mit-license.php MIT
  * @author  Flyingfoxx <kyle@flyingfoxx.com>
  */
 interface CommandTranslator
@@ -24,4 +24,4 @@ interface CommandTranslator
      * @return mixed
      */
     public function toValidator($command);
-} 
+}

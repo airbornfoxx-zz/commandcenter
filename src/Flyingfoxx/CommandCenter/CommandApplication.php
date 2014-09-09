@@ -1,10 +1,10 @@
-<?php namespace Flyingfoxx\CommandCenter;
+<?php
+namespace Flyingfoxx\CommandCenter;
 
 /**
  * Interface CommandApplication
  *
  * @package Flyingfoxx\CommandCenter
- * @license http://www.opensource.org/licenses/mit-license.php MIT
  * @author  Flyingfoxx <kyle@flyingfoxx.com>
  */
 interface CommandApplication
@@ -33,4 +33,4 @@ interface CommandApplication
      * @return mixed
      */
     public function logEvent($message);
-} 
+}

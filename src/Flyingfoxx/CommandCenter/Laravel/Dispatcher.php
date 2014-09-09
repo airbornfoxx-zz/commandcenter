@@ -1,4 +1,5 @@
-<?php namespace Flyingfoxx\CommandCenter\Laravel;
+<?php
+namespace Flyingfoxx\CommandCenter\Laravel;
 
 use App;
 
@@ -6,7 +7,6 @@ use App;
  * Dispatches events for Laravel entities.
  *
  * @package Flyingfoxx\CommandCenter\Laravel
- * @license http://www.opensource.org/licenses/mit-license.php MIT
  * @author  Flyingfoxx <kyle@flyingfoxx.com>
  */
 trait Dispatcher
@@ -31,4 +31,4 @@ trait Dispatcher
     {
         return App::make('Flyingfoxx\CommandCenter\Eventing\EventDispatcher');
     }
-} 
+}

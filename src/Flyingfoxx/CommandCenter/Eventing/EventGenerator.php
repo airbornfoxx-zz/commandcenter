@@ -1,10 +1,10 @@
-<?php namespace Flyingfoxx\CommandCenter\Eventing;
+<?php
+namespace Flyingfoxx\CommandCenter\Eventing;
 
 /**
  * Generates events to be dispatched within the CommandCenter application.
  *
  * @package Flyingfoxx\CommandCenter\Eventing
- * @license http://www.opensource.org/licenses/mit-license.php MIT
  * @author  Flyingfoxx <kyle@flyingfoxx.com>
  */
 trait EventGenerator

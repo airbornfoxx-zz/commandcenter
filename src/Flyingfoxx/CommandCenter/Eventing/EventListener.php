@@ -1,4 +1,5 @@
-<?php namespace Flyingfoxx\CommandCenter\Eventing;
+<?php
+namespace Flyingfoxx\CommandCenter\Eventing;
 
 use ReflectionClass;
 
@@ -6,7 +7,6 @@ use ReflectionClass;
  * Handles events for their registered listeners.
  *
  * @package Flyingfoxx\CommandCenter\Eventing
- * @license http://www.opensource.org/licenses/mit-license.php MIT
  * @author  Flyingfoxx <kyle@flyingfoxx.com>
  */
 class EventListener
@@ -21,8 +21,7 @@ class EventListener
     {
         $eventName = $this->getEventName($event);
 
-        if ($this->listenerIsRegistered($eventName))
-        {
+        if ($this->listenerIsRegistered($eventName)) {
             return call_user_func([$this, 'when'.$eventName], $event);
         }
     }

@@ -1,4 +1,5 @@
-<?php namespace Flyingfoxx\CommandCenter\Eventing;
+<?php
+namespace Flyingfoxx\CommandCenter\Eventing;
 
 use Flyingfoxx\CommandCenter\CommandApplication;
 
@@ -6,7 +7,6 @@ use Flyingfoxx\CommandCenter\CommandApplication;
  * Dispatches events within the CommandCenter application.
  *
  * @package Flyingfoxx\CommandCenter\Eventing
- * @license http://www.opensource.org/licenses/mit-license.php MIT
  * @author  Flyingfoxx <kyle@flyingfoxx.com>
  */
 class EventDispatcher
@@ -35,8 +35,7 @@ class EventDispatcher
      */
     public function dispatch(array $events)
     {
-        foreach ($events as $event)
-        {
+        foreach ($events as $event) {
             $eventName = $this->getEventName($event);
 
             $this->app->fireEvent($eventName, $event);

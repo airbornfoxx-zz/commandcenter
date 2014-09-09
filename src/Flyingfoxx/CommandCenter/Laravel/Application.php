@@ -1,4 +1,5 @@
-<?php namespace Flyingfoxx\CommandCenter\Laravel;
+<?php
+namespace Flyingfoxx\CommandCenter\Laravel;
 
 use Flyingfoxx\CommandCenter\CommandApplication;
 use Illuminate\Foundation\Application as App;
@@ -9,7 +10,6 @@ use Illuminate\Log\Writer;
  * Implements Laravel as the CommandCenter application.
  *
  * @package Flyingfoxx\CommandCenter\Laravel
- * @license http://www.opensource.org/licenses/mit-license.php MIT
  * @author  Flyingfoxx <kyle@flyingfoxx.com>
  */
 class Application implements CommandApplication

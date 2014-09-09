@@ -1,16 +1,17 @@
-<?php namespace Flyingfoxx\CommandCenter\Laravel;
+<?php
+namespace Flyingfoxx\CommandCenter\Laravel;
 
 use Flyingfoxx\CommandCenter\ValidationCommandBus;
 use Illuminate\Support\ServiceProvider;
 
 /**
- * Class CommandCenterServiceProvider
+ * Registers and bootstraps CommandCenter within the IoC.
  *
  * @package Flyingfoxx\CommandCenter
- * @license http://www.opensource.org/licenses/mit-license.php MIT
  * @author  Flyingfoxx <kyle@flyingfoxx.com>
  */
-class CommandCenterServiceProvider extends ServiceProvider {
+class CommandCenterServiceProvider extends ServiceProvider
+{
 
     /**
      * Indicates if loading of the provider is deferred.

@@ -1,10 +1,10 @@
-<?php namespace Flyingfoxx\CommandCenter;
+<?php
+namespace Flyingfoxx\CommandCenter;
 
 /**
  * Translates commands to their respective destinations.
  *
  * @package Flyingfoxx\CommandCenter
- * @license http://www.opensource.org/licenses/mit-license.php MIT
  * @author  Flyingfoxx <kyle@flyingfoxx.com>
  */
 class MainCommandTranslator implements CommandTranslator
@@ -19,11 +19,10 @@ class MainCommandTranslator implements CommandTranslator
     public function toHandler($command)
     {
         $class = get_class($command);
-        $offset = $this->positionAt('Command', $class) ?: $this->positionAt('Request', $class);
+        $offset = ($this->positionAt('Command', $class)) ?: $this->positionAt('Request', $class);
         $handlerClass = substr_replace($class, 'Handler', $offset);
 
-        if (!class_exists($handlerClass))
-        {
+        if (!class_exists($handlerClass)) {
             $message = "Command handler [$handlerClass] does not exist.";
             throw new HandlerNotRegisteredException($message);
         }
@@ -40,7 +39,7 @@ class MainCommandTranslator implements CommandTranslator
     public function toValidator($command)
     {
         $class = get_class($command);
-        $offset = $this->positionAt('Command', $class) ?: $this->positionAt('Request', $class);
+        $offset = ($this->positionAt('Command', $class)) ?: $this->positionAt('Request', $class);
 
         return substr_replace($class, 'Validator', $offset);
     }
