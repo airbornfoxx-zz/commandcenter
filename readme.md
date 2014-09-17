@@ -364,7 +364,6 @@ class RegisterUserHandler implements CommandHandler
     public function __construct(User $user)
     {
         $this->user = $user;
-        $this->dispatcher = $dispatcher;
     }
 
     public function handle($command)
@@ -380,9 +379,9 @@ class RegisterUserHandler implements CommandHandler
 
 So, instead of calling `dispatch($events)`, you would call `dispatchEventsFor($entity)` on the handler class, passing in the entity. The trait will also automatically release the events on the passed in entity.
 
-### Laravel 4.3 Update
+### Laravel 5 Update
 
-Now with Laravel 4.3, you can make use of method injection as well as using form request objects as command objects. The mapping is as follows:
+Now with Laravel 5, you can make use of method injection as well as using form request objects as command objects. The mapping is as follows:
 
 - RegisterUserRequest => RegisterUserHandler
 - PostBlogEntryRequest => PostBlogEntryHandler
